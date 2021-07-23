@@ -8,11 +8,6 @@ const TodoWrapper = styled.div`
     max-width: ${props => props.theme.breakpoints.md};
     overflow-y: auto;
     color: ${props => props.theme.fg};
-
-    h1 {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: bold;
-    }
 `;
 
 export const TodoList: React.FC = () => {

@@ -5,8 +5,6 @@ const InputContainer = styled.div`
     width: 100%;
     position: relative;
     
-    font-family: 'Roboto', sans-serif;
-
     input {
         width: 100%;
         padding: 1rem;
