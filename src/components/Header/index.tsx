@@ -8,6 +8,7 @@ const StyledHeader = styled.div`
     width: 100vw;
     padding: 1rem 2rem;
     background-color: ${props => props.theme.bg};
+    border: 1px solid ${props => props.theme.offsetBg};
     box-shadow: ${props => `${props.theme.shadow} ${props.theme.offsetBg}`};
 `;
 

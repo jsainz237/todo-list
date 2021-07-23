@@ -1,18 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ListInput } from '../ListInput';
 
 const TodoWrapper = styled.div`
-    background: red;
-    height: 50%;
+    flex: 1;
     width: 100%;
     max-width: ${props => props.theme.breakpoints.md};
-    border-radius: 24px;
+    overflow-y: auto;
+    color: ${props => props.theme.fg};
+
+    h1 {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+    }
 `;
 
 export const TodoList: React.FC = () => {
     return (
         <TodoWrapper>
-
+            <h1>Todo List</h1>
+            <ListInput />
         </TodoWrapper>
     );
 }

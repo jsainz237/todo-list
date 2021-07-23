@@ -2,7 +2,7 @@ export const theme = {
     bg: '#fafafa',
     fg: '#141414',
 
-    offsetBg: '#d4d4d4',
+    offsetBg: '#eaeaea',
     offsetFg: '#303030',
 
     breakpoints: {

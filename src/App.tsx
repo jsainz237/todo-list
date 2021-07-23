@@ -22,7 +22,7 @@ const Container = styled(BootstrapContainer)`
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
+  padding-top: 4rem;
 `;
 
 function App() {
