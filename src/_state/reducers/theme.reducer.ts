@@ -8,6 +8,9 @@ const theme: DefaultTheme = {
         fg: '#141414',
         offsetBg: '#eaeaea',
         offsetFg: '#303030',
+
+        darkGray: '#6d6d6d',
+        lightGray: '#dcdcdc',
     },
 
     breakpoints: {

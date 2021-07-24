@@ -7,6 +7,9 @@ declare module 'styled-components' {
             fg: string;
             offsetBg: string;
             offsetFg: string;
+
+            darkGray: string;
+            lightGray: string;
         };
 
         breakpoints: {

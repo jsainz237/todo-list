@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ListInput } from '../ListInput';
-import { ListItem } from '../ListItem';
+import { ListItem, ListItemProps } from '../ListItem';
+
+const LS_LIST_KEY = 'user-todo-list';
 
 const TodoWrapper = styled.div`
     flex: 1;
@@ -21,18 +23,46 @@ const ListWrapper = styled.div`
     width: 100%;
     border-radius: 1rem;
     overflow: hidden;
-    /* box-shadow: ${props => `${props.theme.shadow} #6e6e6e`}; */
 `;
 
 export const TodoList: React.FC = () => {
+    const [listItems, setListItems] = React.useState<(Pick<ListItemProps, 'text' | 'checked'>)[]>([]);
+
+    // on component did mount, initialize list from local storage
+    React.useEffect(() => {
+        const persistedList = localStorage.getItem(LS_LIST_KEY);
+        if(persistedList) {
+            setListItems(JSON.parse(persistedList));
+        }
+    }, []);
+
+    // everytime list is updated, write to local storage
+    React.useEffect(() => {
+        localStorage.setItem(LS_LIST_KEY, JSON.stringify(listItems));
+    }, [listItems])
+
+    /** Append item to todo list */
+    const appendItem = (text: string) => {
+        setListItems(prev => [ ...prev, { text }]);
+        localStorage.setItem(LS_LIST_KEY, JSON.stringify(listItems));
+    }
+
     return (
         <TodoWrapper>
             <h1>Todo List</h1>
-            <ListInput />
+            <ListInput appendToList={appendItem} />
             <ListContainer>
                 <ListWrapper>
-                    <ListItem index={0} text="test" />
-                    <ListItem index={1} text="test" last />
+                    {
+                        listItems.map(({ text, checked }, index) => (
+                            <ListItem 
+                                index={index} 
+                                text={text}
+                                checked={checked}
+                                last={index === listItems.length - 1}
+                            />
+                        ))
+                    }
                 </ListWrapper>
             </ListContainer>
         </TodoWrapper>

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Checkbox } from '../Checkbox';
 
-interface ListItemProps {
+export interface ListItemProps {
     index: number;
     text: string;
     checked?: boolean;
@@ -22,7 +22,7 @@ const ItemWrapper = styled.div<Pick<ListItemProps, 'last'>>`
         content: '';
         width: calc(100% - 2rem);
         height: 1px;
-        background-color: #d6d6d6;
+        background-color: ${props => props.theme.colors.lightGray};
         position: absolute;
         bottom: 0;
     }
