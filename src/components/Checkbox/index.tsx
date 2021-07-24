@@ -18,8 +18,7 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
 `;
 
 const CheckmarkSymbol = styled.div`
-    font-family: system-ui;
-    font-weight: 900;
+    padding-top: 3px;
     color: white;
 `;
 
@@ -46,7 +45,9 @@ export const Checkbox: React.FC<CheckmarkProps> = ({ checked, onChange }) => {
             <CheckboxContainer>
                 <HiddenCheckbox checked={checked} onChange={onChange} />
                 <StyledCheckbox checked={checked}>
-                    <CheckmarkSymbol>&#x2713;</CheckmarkSymbol>
+                    <CheckmarkSymbol>
+                        <i className="fas fa-check"></i>
+                    </CheckmarkSymbol>
                 </StyledCheckbox>
             </CheckboxContainer>
         </label>

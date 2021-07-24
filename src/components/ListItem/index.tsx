@@ -19,7 +19,7 @@ const slideInAnim = keyframes`
 
     to {
         opacity: 1;
-        transform: translateX(0);
+        tranform: translateX(0);
     }
 `;
 
@@ -33,8 +33,9 @@ const StyledXButton = styled.button`
     font-weight: 900;
     color: ${props => props.theme.colors.darkGray};
     background-color: transparent;
+    visibility: hidden;
 
-    &:hover {
+    &:hover > i {
         color: #d84a4a;
     }
 `;
