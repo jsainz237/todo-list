@@ -14,6 +14,7 @@ const InputContainer = styled.div`
         padding: 1rem;
         border-radius: 1rem;
         font-size: 1.25rem;
+        color: ${props => props.theme.colors.fg};
         background-color: ${props => props.theme.colors.offsetBg};
         border: none;
         outline: none;

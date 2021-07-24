@@ -5,7 +5,7 @@ import type { RootState } from '../store';
 const theme: DefaultTheme = {
     colors: {
         bg: '#fafafa',
-        fg: '#141414',
+        fg: '#171717',
         offsetBg: '#eaeaea',
         offsetFg: '#303030',
 
@@ -25,14 +25,14 @@ const theme: DefaultTheme = {
     shadow: '0 1px 10px 1px',
 }
 
-export type ITheme = typeof theme;
-
 export const themeSlice = createSlice({
     name: 'theme',
     initialState: theme,
     reducers: {
         invert: (state) => {
             [state.colors.bg, state.colors.fg] = [state.colors.fg, state.colors.bg];
+            [state.colors.offsetBg, state.colors.offsetFg] = [state.colors.offsetFg, state.colors.offsetBg];
+            [state.colors.darkGray, state.colors.lightGray] = [state.colors.lightGray, state.colors.darkGray];
         }
     }
 });
