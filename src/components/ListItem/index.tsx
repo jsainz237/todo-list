@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Checkbox } from '../Checkbox';
 
 export interface ListItemProps {
@@ -11,6 +11,18 @@ export interface ListItemProps {
     onDeleteItem: (index: number) => any;
 };
 
+const slideInAnim = keyframes`
+    from {
+        opacity: 0;
+        transform: translateX(-25%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+`;
+
 const StyledXButton = styled.button`
     border: none;
     padding: 0;
@@ -21,7 +33,6 @@ const StyledXButton = styled.button`
     font-weight: 900;
     color: ${props => props.theme.colors.darkGray};
     background-color: transparent;
-    visibility: hidden;
 
     &:hover {
         color: #d84a4a;
@@ -35,6 +46,7 @@ const ItemWrapper = styled.div<Pick<ListItemProps, 'last'>>`
     justify-content: space-between;
     width: 100%;
     padding: 1rem;
+    animation: ${slideInAnim} 0.3s ease;
     background-color: ${props => props.theme.colors.offsetBg};
 
     .start-content {
@@ -67,10 +79,7 @@ const StyledText = styled.div<Pick<ListItemProps, 'checked'>>`
     transition: opacity 0.3s ease, color 0.3s ease;
 `;
 
-
-
 export const ListItem: React.FC<ListItemProps> = ({ text, index, checked, last, onCheckChange, onDeleteItem }) => {
-
     return (
         <ItemWrapper last={last}>
             <div className="start-content">
@@ -79,7 +88,9 @@ export const ListItem: React.FC<ListItemProps> = ({ text, index, checked, last, 
                     {text}
                 </StyledText>
             </div>
-            <StyledXButton onClick={() => onDeleteItem(index)} >&#x2A09;</StyledXButton>
+            <StyledXButton onClick={() => onDeleteItem(index)}>
+                <i className="fas fa-times"></i>
+            </StyledXButton>
         </ItemWrapper>
     );
 }
