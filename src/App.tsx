@@ -36,6 +36,7 @@ const Container = styled(BootstrapContainer)`
   display: flex;
   justify-content: center;
   padding-top: 4rem;
+  overflow: auto;
 `;
 
 function App() {

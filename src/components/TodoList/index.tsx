@@ -17,12 +17,19 @@ const TodoWrapper = styled.div`
 const ListContainer = styled.div`
     flex: 1;
     margin: 1rem 0;
+    overflow-y: auto;
 `;
 
 const ListWrapper = styled.div`
     width: 100%;
+    height: 100%;
     border-radius: 1rem;
-    overflow: hidden;
+    overflow-y: auto;
+
+    & > div {
+        border-radius: 1rem;
+        overflow: hidden;
+    }
 `;
 
 export const TodoList: React.FC = () => {
@@ -66,7 +73,7 @@ export const TodoList: React.FC = () => {
             <ListInput appendToList={appendItem} />
             <ListContainer>
                 <ListWrapper>
-                    {
+                    <div>{
                         listItems.map(({ text, checked }, index) => (
                             <ListItem 
                                 key={`key-${index}`}
@@ -78,7 +85,7 @@ export const TodoList: React.FC = () => {
                                 onDeleteItem={handleDeleteItem}
                             />
                         ))
-                    }
+                    }</div>
                 </ListWrapper>
             </ListContainer>
         </TodoWrapper>
