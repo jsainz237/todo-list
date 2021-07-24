@@ -1,12 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { DefaultTheme } from 'styled-components';
 import type { RootState } from '../store';
 
-const theme = {
-    bg: '#fafafa',
-    fg: '#141414',
-
-    offsetBg: '#eaeaea',
-    offsetFg: '#303030',
+const theme: DefaultTheme = {
+    colors: {
+        bg: '#fafafa',
+        fg: '#141414',
+        offsetBg: '#eaeaea',
+        offsetFg: '#303030',
+    },
 
     breakpoints: {
         xs: '0',
@@ -20,12 +22,14 @@ const theme = {
     shadow: '0 1px 10px 1px',
 }
 
+export type ITheme = typeof theme;
+
 export const themeSlice = createSlice({
     name: 'theme',
     initialState: theme,
     reducers: {
         invert: (state) => {
-            [state.bg, state.fg] = [state.fg, state.bg];
+            [state.colors.bg, state.colors.fg] = [state.colors.fg, state.colors.bg];
         }
     }
 });

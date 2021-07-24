@@ -7,9 +7,9 @@ const StyledHeader = styled.div`
     align-items: center;
     width: 100vw;
     padding: 1rem 2rem;
-    background-color: ${props => props.theme.bg};
-    border: 1px solid ${props => props.theme.offsetBg};
-    box-shadow: ${props => `${props.theme.shadow} ${props.theme.offsetBg}`};
+    background-color: ${props => props.theme.colors.bg};
+    border: 1px solid ${props => props.theme.colors.offsetBg};
+    box-shadow: ${props => `${props.theme.shadow} ${props.theme.colors.offsetBg}`};
 `;
 
 const StyledImg = styled.img`

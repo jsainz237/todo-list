@@ -9,7 +9,7 @@ const InputContainer = styled.div`
         width: 100%;
         padding: 1rem;
         border-radius: 1rem;
-        background-color: ${props => props.theme.offsetBg};
+        background-color: ${props => props.theme.colors.offsetBg};
         border: none;
         outline: none;
     }
@@ -26,8 +26,8 @@ const InputContainer = styled.div`
         .icon {
             padding: 0 0.5rem;
             padding-top: 2px;
-            background-color: ${props => props.theme.offsetBg};
-            color: ${props => props.theme.fg};
+            background-color: ${props => props.theme.colors.offsetBg};
+            color: ${props => props.theme.colors.fg};
             border-radius: 5px;
             border: 1px solid #cacaca;
             box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.3);

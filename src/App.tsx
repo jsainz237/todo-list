@@ -17,6 +17,10 @@ const GlobalStyle = createGlobalStyle`
   div, p, input {
     font-family: 'Roboto', sans-serif;
   }
+
+  * {
+    transition: color 0.3s ease, background-color 0.3s ease;
+  }
 `;
 
 const AppWrapper = styled.div`
@@ -24,10 +28,7 @@ const AppWrapper = styled.div`
   flex-direction: column;
   height: 100vh;
   width: 100vw;
-  background-color: ${props => props.theme.bg};
-  * {
-    transition: color 1s ease, background-color 1s ease;
-  }
+  background-color: ${props => props.theme.colors.bg};
 `;
 
 const Container = styled(BootstrapContainer)`
