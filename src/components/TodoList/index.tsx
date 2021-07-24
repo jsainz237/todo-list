@@ -40,7 +40,17 @@ export const TodoList: React.FC = () => {
         const persistedList = localStorage.getItem(LS_LIST_KEY);
         if(persistedList) {
             setListItems(JSON.parse(persistedList));
+            return;
         }
+
+        const firstTimeList = [
+            { text: "Welcome to my todo list demo" },
+            { text: `Input an item at the top and press Enter to add a list item` },
+            { text: "Click on the left circle to mark something as done", checked: true },
+            { text: "Click on the \u2A09 to the right to delete an item" },
+        ];
+
+        setListItems(firstTimeList);
     }, []);
 
     // everytime list is updated, write to local storage
