@@ -44,14 +44,20 @@ export const TodoList: React.FC = () => {
     /** Append item to todo list */
     const appendItem = (text: string) => {
         setListItems(prev => [ ...prev, { text }]);
-        localStorage.setItem(LS_LIST_KEY, JSON.stringify(listItems));
     }
 
-    const handleToggleCheck = (index: number) => {
+    /** callback for when an item is checked off */
+    const handleToggleCheck = (itemIndex: number) => {
         const listCopy = [...listItems];
-        const itemCopy = listCopy[index];
-        listCopy[index] = { ...itemCopy, checked: !itemCopy.checked };
+        const itemCopy = listCopy[itemIndex];
+        listCopy[itemIndex] = { ...itemCopy, checked: !itemCopy.checked };
         setListItems(listCopy);
+    }
+
+    /** Callback for when an item is deleted */
+    const handleDeleteItem = (itemIndex: number) => {
+        const updatedList = listItems.filter((_, ind) => ind !== itemIndex);
+        setListItems(updatedList);
     }
 
     return (
@@ -69,6 +75,7 @@ export const TodoList: React.FC = () => {
                                 checked={checked}
                                 last={index === listItems.length - 1}
                                 onCheckChange={handleToggleCheck}
+                                onDeleteItem={handleDeleteItem}
                             />
                         ))
                     }
