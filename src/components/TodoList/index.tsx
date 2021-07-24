@@ -47,6 +47,13 @@ export const TodoList: React.FC = () => {
         localStorage.setItem(LS_LIST_KEY, JSON.stringify(listItems));
     }
 
+    const handleToggleCheck = (index: number) => {
+        const listCopy = [...listItems];
+        const itemCopy = listCopy[index];
+        listCopy[index] = { ...itemCopy, checked: !itemCopy.checked };
+        setListItems(listCopy);
+    }
+
     return (
         <TodoWrapper>
             <h1>Todo List</h1>
@@ -56,10 +63,12 @@ export const TodoList: React.FC = () => {
                     {
                         listItems.map(({ text, checked }, index) => (
                             <ListItem 
+                                key={`key-${index}`}
                                 index={index} 
                                 text={text}
                                 checked={checked}
                                 last={index === listItems.length - 1}
+                                onCheckChange={handleToggleCheck}
                             />
                         ))
                     }

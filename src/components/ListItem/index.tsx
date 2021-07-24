@@ -7,6 +7,7 @@ export interface ListItemProps {
     text: string;
     checked?: boolean;
     last?: boolean;
+    onCheckChange: (index: number) => any;
 };
 
 const ItemWrapper = styled.div<Pick<ListItemProps, 'last'>>`
@@ -37,12 +38,11 @@ const StyledText = styled.div<Pick<ListItemProps, 'checked'>>`
     transition: opacity 0.3s ease;
 `;
 
-export const ListItem: React.FC<ListItemProps> = ({ text, index, checked: done, last }) => {
-    const [checked, setChecked] = React.useState<boolean>(!!done)
+export const ListItem: React.FC<ListItemProps> = ({ text, index, checked, last, onCheckChange }) => {
 
     return (
         <ItemWrapper last={last}>
-            <Checkbox checked={checked} onChange={() => setChecked(prev => !prev)} />
+            <Checkbox checked={!!checked} onChange={() => onCheckChange(index)} />
             <StyledText checked={checked}>
                 {text}
             </StyledText>
