@@ -1,5 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import { useAppSelector } from '../../_state/hooks';
+import { accessibilitySelector } from '../../_state/reducers/accessibility.reducer';
 import { Checkbox } from '../Checkbox';
 
 export interface ListItemProps {
@@ -81,6 +83,8 @@ const StyledText = styled.div<Pick<ListItemProps, 'checked'>>`
 `;
 
 export const ListItem: React.FC<ListItemProps> = ({ text, index, checked, last, onCheckChange, onDeleteItem }) => {
+    const { accommodations } = useAppSelector(accessibilitySelector);
+
     return (
         <ItemWrapper last={last}>
             <div className="start-content">
@@ -89,7 +93,10 @@ export const ListItem: React.FC<ListItemProps> = ({ text, index, checked, last, 
                     {text}
                 </StyledText>
             </div>
-            <StyledXButton onClick={() => onDeleteItem(index)}>
+            <StyledXButton
+                onClick={() => onDeleteItem(index)}
+                style={{ visibility: accommodations ? 'visible' : undefined }}
+            >
                 <i className="fas fa-times"></i>
             </StyledXButton>
         </ItemWrapper>

@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
+import accessibilityReducer from './reducers/accessibility.reducer';
 import themeReducer from './reducers/theme.reducer';
 
 // create redux store
 export const store = configureStore({
     reducer: {
         theme: themeReducer,
+        accessibility: accessibilityReducer,
     },
 });
 

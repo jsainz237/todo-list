@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
+import { useAppDispatch, useAppSelector } from '../../_state/hooks';
+import { 
+    accessibilitySelector,
+    toggle as toggleAccommodations,
+} from '../../_state/reducers/accessibility.reducer';
 import { ListInput } from '../ListInput';
 import { ListItem, ListItemProps } from '../ListItem';
 
@@ -27,13 +32,35 @@ const ListWrapper = styled.div`
     border-radius: 1rem;
     overflow-y: auto;
 
-    & > div {
+    & > .list {
         border-radius: 1rem;
         overflow: hidden;
     }
 `;
 
+const OptionsWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 1rem;
+    margin: 1rem 0;
+`;
+
+const StyledOptionButton = styled.button<{ active?: boolean }>`
+    padding: 0 0.75rem;
+    border-radius: 2rem;
+    border: 1px solid ${props => props.active ? props.theme.colors.active : props.theme.colors.fg};
+    background: ${props => props.active ? props.theme.colors.active : 'transparent'};
+    color: ${props => props.active ? 'white' : props.theme.colors.fg};
+    box-shadow: none;
+`;
+
 export const TodoList: React.FC = () => {
+    const { accommodations } = useAppSelector(accessibilitySelector);
+    const dispatch = useAppDispatch();
+
     const [listItems, setListItems] = React.useState<
         (Pick<ListItemProps, 'text' | 'checked'> & { id: string })[]
     >([]);
@@ -85,11 +112,22 @@ export const TodoList: React.FC = () => {
 
     return (
         <TodoWrapper>
-            <h1>Todo List</h1>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}>
+                <h1>Todo List</h1>
+                <StyledOptionButton
+                    title="toggle accessibility accomodations"
+                    aria-label="toggle accessibility accomodations"
+                    active={accommodations}
+                    onClick={() => dispatch(toggleAccommodations())}
+                    style={{ padding: '0 8px', marginBottom: '0.8rem', fontSize: '1.1rem' }}
+                >
+                    <i className="fas fa-universal-access"></i>
+                </StyledOptionButton>
+            </div>
             <ListInput appendToList={appendItem} />
             <ListContainer>
                 <ListWrapper>
-                    <div>{
+                    <div className="list">{
                         listItems.map(({ id, text, checked }, index) => (
                             <ListItem 
                                 key={id}
