@@ -75,7 +75,7 @@ const StyledText = styled.div<Pick<ListItemProps, 'checked'>>`
     font-size: 1.25rem;
     font-weight: 300;
     text-decoration: ${props => props.checked && 'line-through'};
-    opacity: ${props => props.checked && 0.3};
+    opacity: ${props => props.checked && 0.7};
     color: ${props => props.theme.colors.fg};
     transition: opacity 0.3s ease, color 0.3s ease;
 `;

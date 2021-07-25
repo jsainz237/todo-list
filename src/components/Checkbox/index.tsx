@@ -11,12 +11,6 @@ const CheckboxContainer = styled.div`
     user-select: none;
 `;
 
-const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
-    position: absolute;
-    height: 0;
-    width: 0;
-`;
-
 const CheckmarkSymbol = styled.div`
     padding-top: 3px;
     color: white;
@@ -33,9 +27,21 @@ const StyledCheckbox = styled.div<Pick<CheckmarkProps, 'checked'>>`
     border-style: ${props => props.checked ? 'none' : 'solid'};
     border-radius: 2rem;
     background-color: ${props => props.checked ? '#489c5a' : 'transparent'};
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
 
     ${CheckmarkSymbol} {
         visibility: ${props => props.checked ? 'visible' : 'hidden'};
+    }
+`;
+
+const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
+    position: absolute;
+    height: 0;
+    width: 0;
+    opacity: 0;
+    
+    &:focus ~ ${StyledCheckbox} {
+        box-shadow: 0 0 4px 4px ${props => props.theme.colors.lightGray}; 
     }
 `;
 
@@ -43,7 +49,7 @@ export const Checkbox: React.FC<CheckmarkProps> = ({ checked, onChange }) => {
     return (
         <label>
             <CheckboxContainer>
-                <HiddenCheckbox checked={checked} onChange={onChange} />
+                <HiddenCheckbox aria-label="checkbox" checked={checked} onChange={onChange} />
                 <StyledCheckbox checked={checked}>
                     <CheckmarkSymbol>
                         <i className="fas fa-check"></i>

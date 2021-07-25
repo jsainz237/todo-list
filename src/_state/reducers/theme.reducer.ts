@@ -9,7 +9,7 @@ const theme: DefaultTheme = {
         offsetBg: '#eaeaea',
         offsetFg: '#303030',
 
-        darkGray: '#6d6d6d',
+        darkGray: '#686868',
         lightGray: '#dcdcdc',
     },
 

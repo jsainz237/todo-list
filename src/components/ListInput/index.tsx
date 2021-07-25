@@ -5,19 +5,27 @@ interface ListInputProps {
     appendToList: (text: string) => any;
 }
 
-const InputContainer = styled.div`
+const InputContainer = styled.label`
     width: 100%;
     position: relative;
-    
-    input {
-        width: 100%;
-        padding: 1rem;
-        border-radius: 1rem;
-        font-size: 1.25rem;
-        color: ${props => props.theme.colors.fg};
-        background-color: ${props => props.theme.colors.offsetBg};
-        border: none;
-        outline: none;
+`;
+
+const StyledInput = styled.input.attrs({
+    type: "text",
+    placeholder: "Add todo list item"
+})`
+    width: 100%;
+    padding: 1rem;
+    border-radius: 1rem;
+    font-size: 1.25rem;
+    color: ${props => props.theme.colors.fg};
+    background-color: ${props => props.theme.colors.offsetBg};
+    border: none;
+    outline: none;
+    transition: box-shadow 0.3s ease; 
+
+    &:focus {
+        box-shadow: 0 0 4px 4px ${props => props.theme.colors.lightGray};
     }
 `;
 
@@ -39,7 +47,7 @@ const StyledIconButton = styled.button`
     color: ${props => props.disabled ? props.theme.colors.darkGray : props.theme.colors.fg};
     border-radius: 5px;
     border: 1px solid #cacaca;
-    box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 3px 0px ${props => props.theme.colors.darkGray};
 
     &:active {
         box-shadow: unset;
@@ -62,11 +70,9 @@ export const ListInput: React.FC<ListInputProps> = ({ appendToList }) => {
 
     return (
         <InputContainer>
-            <input 
-                type="text"
+            <StyledInput 
                 value={inputText}
                 onChange={e => setInputText(e.target.value)}
-                placeholder="Add todo list item"
                 onKeyDown={handleKeyDown} 
             />
             <IconContainer disabled={!inputText}>
