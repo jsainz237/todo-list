@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { v4 as uuidv4 } from 'uuid';
 import { ListInput } from '../ListInput';
 import { ListItem, ListItemProps } from '../ListItem';
 
@@ -33,7 +34,9 @@ const ListWrapper = styled.div`
 `;
 
 export const TodoList: React.FC = () => {
-    const [listItems, setListItems] = React.useState<(Pick<ListItemProps, 'text' | 'checked'>)[]>([]);
+    const [listItems, setListItems] = React.useState<
+        (Pick<ListItemProps, 'text' | 'checked'> & { id: string })[]
+    >([]);
 
     // on component did mount, initialize list from local storage
     React.useEffect(() => {
@@ -44,10 +47,10 @@ export const TodoList: React.FC = () => {
         }
 
         const firstTimeList = [
-            { text: "Welcome to my todo list demo" },
-            { text: `Input an item at the top and press Enter to add a list item` },
-            { text: "Click on the left circle to mark something as done", checked: true },
-            { text: "Click on the \u2A09 to the right to delete an item" },
+            { id: uuidv4(), text: "Welcome to my todo list demo" },
+            { id: uuidv4(), text: `Input an item at the top and press Enter to add a list item` },
+            { id: uuidv4(), text: "Click on the left circle to mark something as done", checked: true },
+            { id: uuidv4(), text: "Click on the \u2A09 to the right to delete an item" },
         ];
 
         setListItems(firstTimeList);
@@ -60,7 +63,10 @@ export const TodoList: React.FC = () => {
 
     /** Append item to todo list */
     const appendItem = (text: string) => {
-        setListItems(prev => [ ...prev, { text }]);
+        setListItems(prev => [{
+            id: uuidv4(),
+            text
+        }, ...prev]);
     }
 
     /** callback for when an item is checked off */
@@ -84,9 +90,9 @@ export const TodoList: React.FC = () => {
             <ListContainer>
                 <ListWrapper>
                     <div>{
-                        listItems.map(({ text, checked }, index) => (
+                        listItems.map(({ id, text, checked }, index) => (
                             <ListItem 
-                                key={`key-${index}`}
+                                key={id}
                                 index={index} 
                                 text={text}
                                 checked={checked}
