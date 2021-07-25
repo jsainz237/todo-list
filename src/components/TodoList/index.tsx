@@ -23,6 +23,7 @@ const TodoWrapper = styled.div`
 const ListContainer = styled.div`
     flex: 1;
     margin: 1rem 0;
+    margin-top: 0;
     overflow-y: auto;
 `;
 
@@ -51,13 +52,17 @@ const OptionsWrapper = styled.div`
 const StyledOptionButton = styled.button<{ active?: boolean }>`
     padding: 0 0.75rem;
     border-radius: 2rem;
+    margin-left: 1rem;
     border: 1px solid ${props => props.active ? props.theme.colors.active : props.theme.colors.fg};
     background: ${props => props.active ? props.theme.colors.active : 'transparent'};
     color: ${props => props.active ? 'white' : props.theme.colors.fg};
     box-shadow: none;
 `;
 
+type Filter = 'all' | 'active' | 'completed';
+
 export const TodoList: React.FC = () => {
+    const [filter, setFilter] = React.useState<Filter>('all');
     const { accommodations } = useAppSelector(accessibilitySelector);
     const dispatch = useAppDispatch();
 
@@ -110,6 +115,26 @@ export const TodoList: React.FC = () => {
         setListItems(updatedList);
     }
 
+    /** Render List items based on filter */
+    const renderListItems = () => {
+        return listItems
+            .filter(({ checked }) => 
+                filter === 'all' ? true :
+                    filter === 'completed' ? !!checked : !checked
+            )
+            .map(({ id, text, checked }, index) => (
+                <ListItem 
+                    key={id}
+                    index={index} 
+                    text={text}
+                    checked={checked}
+                    last={index === listItems.length - 1}
+                    onCheckChange={handleToggleCheck}
+                    onDeleteItem={handleDeleteItem}
+                />
+            ))
+    }
+
     return (
         <TodoWrapper>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}>
@@ -119,27 +144,20 @@ export const TodoList: React.FC = () => {
                     aria-label="toggle accessibility accomodations"
                     active={accommodations}
                     onClick={() => dispatch(toggleAccommodations())}
-                    style={{ padding: '0 8px', marginBottom: '0.8rem', fontSize: '1.1rem' }}
+                    style={{ margin: 0, padding: '0 8px', marginBottom: '0.8rem', fontSize: '1.1rem' }}
                 >
                     <i className="fas fa-universal-access"></i>
                 </StyledOptionButton>
             </div>
             <ListInput appendToList={appendItem} />
+            <OptionsWrapper>
+                <StyledOptionButton onClick={() => setFilter('all')} active={filter === 'all'}>all</StyledOptionButton>
+                <StyledOptionButton onClick={() => setFilter('active')} active={filter === 'active'}>active</StyledOptionButton>
+                <StyledOptionButton onClick={() => setFilter('completed')} active={filter === 'completed'}>completed</StyledOptionButton>
+            </OptionsWrapper>
             <ListContainer>
                 <ListWrapper>
-                    <div className="list">{
-                        listItems.map(({ id, text, checked }, index) => (
-                            <ListItem 
-                                key={id}
-                                index={index} 
-                                text={text}
-                                checked={checked}
-                                last={index === listItems.length - 1}
-                                onCheckChange={handleToggleCheck}
-                                onDeleteItem={handleDeleteItem}
-                            />
-                        ))
-                    }</div>
+                    <div className="list">{renderListItems()}</div>
                 </ListWrapper>
             </ListContainer>
         </TodoWrapper>
