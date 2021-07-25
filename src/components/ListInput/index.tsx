@@ -29,26 +29,34 @@ const IconContainer = styled.div<{ disabled: boolean }>`
     position: absolute;
     top: 0;
     right: 0;
+`;
 
-    .icon {
-        padding: 0 0.5rem;
-        padding-top: 2px;
-        user-select: none;
-        background-color: ${props => props.theme.colors.offsetBg};
-        color: ${props => props.disabled ? props.theme.colors.darkGray : props.theme.colors.fg};
-        border-radius: 5px;
-        border: 1px solid #cacaca;
-        box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.3);
+const StyledIconButton = styled.button`
+    padding: 0 0.5rem;
+    padding-top: 2px;
+    user-select: none;
+    background-color: ${props => props.theme.colors.offsetBg};
+    color: ${props => props.disabled ? props.theme.colors.darkGray : props.theme.colors.fg};
+    border-radius: 5px;
+    border: 1px solid #cacaca;
+    box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.3);
+
+    &:active {
+        box-shadow: unset;
     }
 `;
 
 export const ListInput: React.FC<ListInputProps> = ({ appendToList }) => {
     const [inputText, setInputText] = React.useState<string>('');
 
+    const addToList = () => {
+        appendToList(inputText);
+        setInputText('');
+    }
+
     const handleKeyDown = (e: React.KeyboardEvent) => {
         if(!!inputText && e.key === 'Enter') {
-            appendToList(inputText);
-            setInputText('');
+            addToList();
         }
     }
 
@@ -62,7 +70,13 @@ export const ListInput: React.FC<ListInputProps> = ({ appendToList }) => {
                 onKeyDown={handleKeyDown} 
             />
             <IconContainer disabled={!inputText}>
-                <div className="icon">&#x23CE;</div>
+                <StyledIconButton
+                    disabled={!inputText}
+                    onClick={addToList}
+                >
+                    {/* Return Key symbol */}
+                    &#x23CE; 
+                </StyledIconButton>
             </IconContainer>
         </InputContainer>
     );
