@@ -17,6 +17,12 @@ const StyledHeader = styled.div<{ darkMode: boolean }>`
     border-bottom: 1px solid ${props => props.theme.colors.offsetBg};
     
     transition: background-color 0.3s ease, border-color 0.3s ease;
+
+    .flex-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
 `;
 
 const StyledImg = styled.img`
@@ -30,6 +36,18 @@ const StyledToggleContainer = styled.div<{ darkMode: boolean }>`
     border-radius: 2rem;
     padding: 0 1px 2px 0;
     transition: border-color 0.3s ease;
+`;
+
+const StyledATag = styled.a.attrs({ target: "_blank" })`
+    font-size: 2rem;
+    color: ${props => props.theme.colors.fg};
+    opacity: 1;
+    margin-left: 1rem;
+
+    &:hover {
+        color: ${props => props.theme.colors.fg};
+        opacity: 0.7;
+    }
 `;
 
 export const Header: React.FC = () => {
@@ -61,14 +79,21 @@ export const Header: React.FC = () => {
 
     return (
         <StyledHeader darkMode={isDarkMode}>
-            <StyledImg src={logo} alt="logo" />
-            <StyledToggleContainer darkMode={isDarkMode}>
-                <DarkModeToggle
-                    checked={isDarkMode}
-                    onChange={toggleDarkMode}
-                    size={64}
-                />
-            </StyledToggleContainer>
+            <a title="personal website" aria-label="personal website" target="_blank" href="https://jsainz.me">
+                <StyledImg src={logo} alt="logo" />
+            </a>
+            <div className="flex-container">
+                <StyledToggleContainer darkMode={isDarkMode}>
+                    <DarkModeToggle
+                        checked={isDarkMode}
+                        onChange={toggleDarkMode}
+                        size={64}
+                    />
+                </StyledToggleContainer>
+                <StyledATag title="view source code" aria-label="repository link" href="https://github.com/jsainz237/todo-list">
+                    <i className="fab fa-github"></i>
+                </StyledATag>
+            </div>
         </StyledHeader>
     );
 };

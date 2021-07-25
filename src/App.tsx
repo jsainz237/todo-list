@@ -19,7 +19,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   * {
-    transition: color 0.3s ease, background-color 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
   }
 `;
 
