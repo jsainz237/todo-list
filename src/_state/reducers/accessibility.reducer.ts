@@ -6,7 +6,7 @@ interface AccessibilityState {
 }
 
 const initialState: AccessibilityState = {
-    accommodations: true,
+    accommodations: false,
 }
 
 export const accessibilitySlice = createSlice({
