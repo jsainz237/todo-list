@@ -1,6 +1,5 @@
 # Todo List Demo 
 
-## Demo
 View the [demo](https://todo.jsainz.me).
 
 ## Description
