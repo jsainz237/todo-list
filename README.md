@@ -1,5 +1,8 @@
 # Todo List Demo 
 
+## Demo
+View the [demo](https://todo.jsainz.me).
+
 ## Description
 A simple todo list web application done in [React](https://reactjs.org/) utilizing the following tools/libraries:
 * [Typescript](https://www.typescriptlang.org/)
@@ -24,3 +27,6 @@ The user's dark mode preference is also persisted in local storage. If the user 
 
 ### Responsiveness:
 This application is fully responsive to the size of the screen it is displayed on.
+
+## Hosting
+Hosted at [https://todo.jsainz.me](https://todo.jsainz.me) on AWS Cloudfront CDN.
