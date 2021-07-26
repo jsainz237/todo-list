@@ -22,7 +22,7 @@ const StyledInput = styled.input.attrs({
     background-color: ${props => props.theme.colors.offsetBg};
     border: none;
     outline: none;
-    transition: box-shadow 0.3s ease; 
+    transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease; 
 
     &:focus {
         box-shadow: 0 0 4px 4px ${props => props.theme.colors.lightGray};
